@@ -172,11 +172,11 @@ export default function AboutPage() {
       </section>
 
       {/* ─── OUR STORY ───────────────────────────────── */}
-      <section className="py-32 lg:py-48 max-w-7xl mx-auto px-6 lg:px-10">
+      <section className="py-16 md:py-32 lg:py-48 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
             <div className="text-[10px] tracking-[0.3em] text-[#D6B65A] font-bold mb-6">OUR STORY</div>
-            <h2 className="font-serif text-5xl lg:text-7xl leading-[1.05] mb-10">
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl leading-[1.05] mb-6 md:mb-10">
               <RevealText text="WHERE WE" />
               <br />
               <RevealText text="BEGAN." className="italic text-[#D6B65A]" delay={0.15} />
@@ -194,7 +194,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="relative h-[70vh] lg:h-[85vh] overflow-hidden group">
+          <div className="relative h-[50vh] md:h-[70vh] lg:h-[85vh] overflow-hidden group">
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               whileInView={{ clipPath: "inset(0% 0 0 0)" }}
@@ -241,9 +241,9 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
-                className="bg-[#10070F] p-12 lg:p-16 flex flex-col items-center text-center group hover:bg-[#170B15] transition-colors duration-500"
+                className="bg-[#10070F] p-6 md:p-12 lg:p-16 flex flex-col items-center text-center group hover:bg-[#170B15] transition-colors duration-500"
               >
-                <div className="font-serif text-5xl lg:text-7xl text-[#D6B65A] mb-4 group-hover:scale-110 transition-transform duration-500">{stat.value}</div>
+                <div className="font-serif text-4xl md:text-5xl lg:text-7xl text-[#D6B65A] mb-4 group-hover:scale-110 transition-transform duration-500">{stat.value}</div>
                 <div className="text-[10px] tracking-[0.25em] uppercase text-[#C8BDB7] font-light">{stat.label}</div>
               </motion.div>
             ))}
@@ -252,7 +252,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─── TIMELINE ────────────────────────────────── */}
-      <section className="py-24 lg:py-40 relative">
+      <section className="py-16 md:py-24 lg:py-40 relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-20 lg:mb-32">
             <div className="text-[10px] tracking-[0.3em] text-[#D6B65A] font-bold mb-6">HERITAGE OF EXCELLENCE</div>

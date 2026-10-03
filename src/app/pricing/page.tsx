@@ -106,12 +106,12 @@ export default function PricingPage() {
       </section>
 
       {/* --- SECTION 01: BRAND STRATEGY --- */}
-      <section id="strategy" className="py-32 lg:py-48 max-w-7xl mx-auto px-6 lg:px-10 relative">
+      <section id="strategy" className="py-16 md:py-32 lg:py-48 max-w-7xl mx-auto px-6 lg:px-10 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start relative z-10">
           <div>
             <div className="text-[10px] tracking-[0.25em] text-[#D6B65A] font-bold mb-4">01</div>
             <h2 className="text-xs tracking-[0.25em] uppercase text-[#C8BDB7]/80 mb-10">BRAND STRATEGY</h2>
-            <h3 className="font-serif text-5xl lg:text-7xl leading-[1.05] mb-10">
+            <h3 className="font-serif text-3xl md:text-5xl lg:text-7xl leading-[1.05] mb-6 md:mb-10">
               <RevealText text="BUILD THE" />
               <br />
               <RevealText text="FOUNDATION." className="italic text-[#D6B65A]" delay={0.2} />
@@ -127,7 +127,7 @@ export default function PricingPage() {
             </div>
           </div>
           
-          <div className="relative h-[60vh] lg:h-[80vh] w-full overflow-hidden group">
+          <div className="relative h-[45vh] md:h-[60vh] lg:h-[80vh] w-full overflow-hidden group">
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               whileInView={{ clipPath: "inset(0% 0 0 0)" }}
@@ -147,7 +147,7 @@ export default function PricingPage() {
       </section>
 
       {/* --- SECTION 02: E-COMMERCE --- */}
-      <section className="py-32 lg:py-48 relative overflow-hidden">
+      <section className="py-16 md:py-32 lg:py-48 relative overflow-hidden">
         {/* Subtle video background for the entire section */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.15]">
           <video src={VIDEO_ASSETS.heroFallback} autoPlay muted loop playsInline className="w-full h-full object-cover blur-sm" />
@@ -158,7 +158,7 @@ export default function PricingPage() {
           <div className="mb-20 md:mb-32 text-center flex flex-col items-center">
             <div className="text-[10px] tracking-[0.25em] text-[#D6B65A] font-bold mb-4">02</div>
             <h2 className="text-xs tracking-[0.25em] uppercase text-[#C8BDB7]/80 mb-8">DIGITAL COMMERCE</h2>
-            <h3 className="font-serif text-5xl lg:text-7xl leading-[1.05]">
+            <h3 className="font-serif text-3xl md:text-5xl lg:text-7xl leading-[1.05]">
               <RevealText text="TURN ATTENTION" />
               <br />
               <RevealText text="INTO DESIRE." className="italic text-[#D6B65A]" delay={0.2} />
@@ -191,9 +191,9 @@ export default function PricingPage() {
       </section>
 
       {/* --- SECTION 03: FASHION DEVELOPMENT --- */}
-      <section className="py-32 lg:py-48 max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          <div className="order-2 lg:order-1 relative h-[60vh] lg:h-[80vh] w-full overflow-hidden group">
+      <section className="py-16 md:py-32 lg:py-48 max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
+          <div className="order-2 lg:order-1 relative h-[45vh] md:h-[60vh] lg:h-[80vh] w-full overflow-hidden group">
             <motion.div
               initial={{ clipPath: "inset(0 100% 0 0)" }}
               whileInView={{ clipPath: "inset(0 0% 0 0)" }}
@@ -212,7 +212,7 @@ export default function PricingPage() {
           <div className="order-1 lg:order-2">
             <div className="text-[10px] tracking-[0.25em] text-[#D6B65A] font-bold mb-4">03</div>
             <h2 className="text-xs tracking-[0.25em] uppercase text-[#C8BDB7]/80 mb-10">FASHION DEVELOPMENT</h2>
-            <h3 className="font-serif text-5xl lg:text-7xl leading-[1.1] mb-12">
+            <h3 className="font-serif text-3xl md:text-5xl lg:text-7xl leading-[1.1] mb-6 md:mb-12">
               <RevealText text="FROM IDEA" />
               <br />
               <RevealText text="TO FORM." className="italic text-[#D6B65A]" delay={0.2} />
@@ -228,7 +228,7 @@ export default function PricingPage() {
       </section>
 
       {/* --- SECTION 04: BESPOKE DESIGN --- */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[70vh] w-full flex items-center justify-center overflow-hidden py-24">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <motion.div
             initial={{ scale: 1.15 }}
@@ -247,7 +247,7 @@ export default function PricingPage() {
         </div>
 
         <div className="relative z-10 text-center px-6 mt-20">
-          <h2 className="font-serif text-[clamp(4rem,10vw,10rem)] leading-[0.85] text-[#F4EEE5] mb-8">
+          <h2 className="font-serif text-[clamp(2.5rem,8vw,8rem)] leading-[0.85] text-[#F4EEE5] mb-8">
             DESIGNED
             <br />
             <span className="italic text-[#D6B65A] font-light">FOR YOU.</span>
@@ -266,7 +266,7 @@ export default function PricingPage() {
       </section>
 
       {/* --- SECTION 06: PRICING EXPERIENCE --- */}
-      <section className="py-32 lg:py-48 relative overflow-hidden">
+      <section className="py-16 md:py-32 lg:py-48 relative overflow-hidden">
         {/* Subtle video background for pricing */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.08]">
           <video src={VIDEO_ASSETS.contentCreation} autoPlay muted loop playsInline className="w-full h-full object-cover blur-md" />
@@ -275,7 +275,7 @@ export default function PricingPage() {
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 text-center mb-24 relative z-10">
           <div className="text-[10px] tracking-[0.25em] text-[#D6B65A] font-bold mb-4">INVESTMENT</div>
-          <h2 className="font-serif text-5xl lg:text-7xl mb-6">
+          <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl mb-6">
             <RevealText text="CHOOSE YOUR LEVEL" />
             <br />
             <RevealText text="OF AMBITION." className="italic text-[#D6B65A]" delay={0.2} />
@@ -349,7 +349,7 @@ function CommerceCard({ title, desc, price, features, label, highlight }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8 }}
-      className={`relative p-12 flex flex-col justify-between group cursor-pointer backdrop-blur-xl transition-colors duration-700 rounded-lg ${
+      className={`relative p-6 md:p-12 flex flex-col justify-between group cursor-pointer backdrop-blur-xl transition-colors duration-700 rounded-lg ${
         highlight 
           ? "bg-[#170B15]/80 border border-[#D6B65A]/30 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
           : "bg-[#10070F]/60 border border-[rgba(244,238,229,0.06)] hover:bg-[#170B15]/80 hover:border-[#D6B65A]/20"
@@ -420,7 +420,7 @@ function PricingPanel3D({ plan, index }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 1, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative p-12 flex flex-col justify-between group cursor-pointer backdrop-blur-2xl transition-all duration-700 rounded-lg overflow-hidden ${
+      className={`relative p-6 md:p-12 flex flex-col justify-between group cursor-pointer backdrop-blur-2xl transition-all duration-700 rounded-lg overflow-hidden ${
         plan.popular 
           ? "bg-[#170B15]/80 border border-[#D6B65A]/40 lg:-mt-6 lg:mb-6 shadow-[0_30px_60px_rgba(0,0,0,0.6)]" 
           : "bg-[#10070F]/50 border border-[rgba(244,238,229,0.08)] hover:bg-[#170B15]/80 hover:border-[#D6B65A]/20"

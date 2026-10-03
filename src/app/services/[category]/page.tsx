@@ -71,7 +71,7 @@ export default function ServiceCategoryPage({
         <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-10 pb-20 w-full">
           <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight"
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight"
           >
             {category.title}<br />
             <span className="text-[#D6B65A]">For Ambitious Brands</span>
@@ -99,7 +99,7 @@ export default function ServiceCategoryPage({
       </div>
 
       {/* ── INTRO TEXT ── */}
-      <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-5">
+      <div className="max-w-4xl mx-auto px-6 py-12 md:py-20 text-center space-y-5">
         <h2 className="text-xl md:text-2xl font-bold uppercase tracking-[0.2em] text-[#D6B65A]">
           Strategic Guidance for Every Stage of Your Brand&#39;s Journey
         </h2>
@@ -109,7 +109,7 @@ export default function ServiceCategoryPage({
       </div>
 
       {/* ── ZIG-ZAG SERVICES ── */}
-      <div className="max-w-7xl mx-auto px-6 pb-24 space-y-28">
+      <div className="max-w-7xl mx-auto px-6 pb-16 md:pb-24 space-y-16 md:space-y-28">
         {category.services.map((service, index) => {
           const isEven = index % 2 === 0;
           return (
@@ -120,7 +120,7 @@ export default function ServiceCategoryPage({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
-              className={`flex flex-col lg:flex-row gap-12 lg:gap-20 items-center scroll-mt-24 ${!isEven ? "lg:flex-row-reverse" : ""}`}
+              className={`flex flex-col lg:flex-row gap-8 lg:gap-20 items-center scroll-mt-24 ${!isEven ? "lg:flex-row-reverse" : ""}`}
             >
               {/* Image */}
               <div className="w-full lg:w-1/2">
@@ -140,8 +140,8 @@ export default function ServiceCategoryPage({
               </div>
 
               {/* Text */}
-              <div className="w-full lg:w-1/2 space-y-6">
-                <h3 className="text-3xl md:text-4xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight">
+              <div className="w-full lg:w-1/2 space-y-5 md:space-y-6">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight">
                   {service.title}
                 </h3>
                 <p className="text-sm md:text-base text-[#C8BDB7] leading-relaxed font-light">
@@ -182,9 +182,9 @@ export default function ServiceCategoryPage({
 
       {/* ── HOW WE WORK ── */}
       <div className="bg-[#170B15] border-y border-[rgba(214,182,90,0.15)] py-24">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-4 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-serif text-[#F4EEE5] uppercase tracking-wide">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-4 space-y-5 md:space-y-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-[#F4EEE5] uppercase tracking-wide">
               How We Work
             </h2>
             <p className="text-sm text-[#C8BDB7] leading-relaxed font-light">

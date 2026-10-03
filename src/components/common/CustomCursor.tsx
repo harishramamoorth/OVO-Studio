@@ -3,81 +3,109 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
-type CursorState = "default" | "hover" | "play" | "view";
+type CursorState = "default" | "hover" | "play" | "view" | "button";
 
 export default function CustomCursor() {
   const [state, setState] = useState<CursorState>("default");
   const [visible, setVisible] = useState(false);
-  const isTouch = useRef(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+
+  const stateRef = useRef<CursorState>("default");
 
   const mx = useMotionValue(-100);
   const my = useMotionValue(-100);
 
-  // Dot follows cursor exactly
-  const dotX = useSpring(mx, { stiffness: 900, damping: 35, mass: 0.1 });
-  const dotY = useSpring(my, { stiffness: 900, damping: 35, mass: 0.1 });
+  // High frame-rate, zero-lag dot tracking
+  const dotX = useSpring(mx, { stiffness: 1800, damping: 50, mass: 0.01 });
+  const dotY = useSpring(my, { stiffness: 1800, damping: 50, mass: 0.01 });
 
-  // Ring lags behind slightly for elegant feel
-  const ringX = useSpring(mx, { stiffness: 200, damping: 30, mass: 0.5 });
-  const ringY = useSpring(my, { stiffness: 200, damping: 30, mass: 0.5 });
+  // Fast & fluid trailing ring
+  const ringX = useSpring(mx, { stiffness: 350, damping: 28, mass: 0.1 });
+  const ringY = useSpring(my, { stiffness: 350, damping: 28, mass: 0.1 });
 
   useEffect(() => {
-    // Disable on touch devices
-    if (
-      typeof window === "undefined" ||
-      window.matchMedia("(pointer: coarse)").matches
-    ) {
-      isTouch.current = true;
+    // Disable completely on mobile/touch devices
+    const checkMobile = () => {
+      const isTouchDevice =
+        window.matchMedia("(pointer: coarse)").matches ||
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 1024;
+      return isTouchDevice || isSmallScreen;
+    };
+
+    if (checkMobile()) {
+      setIsMobile(true);
       return;
     }
-    if (window.innerWidth < 1024) {
-      isTouch.current = true;
-      return;
-    }
+
+    setIsMobile(false);
+
+    let rafId: number;
 
     const onMove = (e: MouseEvent) => {
       mx.set(e.clientX);
       my.set(e.clientY);
+
       if (!visible) setVisible(true);
 
-      const el = e.target as HTMLElement | null;
-      if (!el) return;
+      // Throttled element inspection to prevent layout thrashing
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const el = e.target as HTMLElement | null;
+        if (!el) return;
 
-      if (el.closest("video, [data-cursor='play']")) {
-        setState("play");
-      } else if (el.closest("img, [data-cursor='view']")) {
-        setState("view");
-      } else if (el.closest("button, a, [data-cursor='hover']")) {
-        setState("hover");
-      } else {
-        setState("default");
-      }
+        let nextState: CursorState = "default";
+        if (el.closest("video, [data-cursor='play']")) {
+          nextState = "play";
+        } else if (el.closest("img, [data-cursor='view']")) {
+          nextState = "view";
+        } else if (el.closest("button, [role='button'], .btn-glow")) {
+          nextState = "button";
+        } else if (el.closest("a, input, textarea, select, [data-cursor='hover']")) {
+          nextState = "hover";
+        }
+
+        // ONLY trigger React re-render when state actually changes!
+        if (nextState !== stateRef.current) {
+          stateRef.current = nextState;
+          setState(nextState);
+        }
+      });
     };
 
+    const onMouseDown = () => setIsClicking(true);
+    const onMouseUp = () => setIsClicking(false);
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
 
     window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("mousedown", onMouseDown, { passive: true });
+    window.addEventListener("mouseup", onMouseUp, { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mx, my, visible]);
 
-  if (isTouch.current || !visible) return null;
+  if (isMobile || !visible) return null;
 
   const isExpanded = state === "play" || state === "view";
+  const isHovered = state === "hover" || state === "button";
 
   return (
-    <>
-      {/* Trailing ring — larger, semi-transparent */}
+    <div className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden">
+      {/* Trailing Ring - GPU Accelerated */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border"
+        className="pointer-events-none fixed top-0 left-0 rounded-full border border-solid will-change-transform"
         style={{
           x: ringX,
           y: ringY,
@@ -85,21 +113,28 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          width:  isExpanded ? 52 : state === "hover" ? 38 : 28,
-          height: isExpanded ? 52 : state === "hover" ? 38 : 28,
+          width: isExpanded ? 56 : state === "button" ? 44 : state === "hover" ? 36 : 26,
+          height: isExpanded ? 56 : state === "button" ? 44 : state === "hover" ? 36 : 26,
+          scale: isClicking ? 0.8 : 1,
           borderColor: isExpanded
-            ? "rgba(214,182,90,0.7)"
+            ? "rgba(214, 182, 90, 0.85)"
+            : state === "button"
+            ? "rgba(214, 182, 90, 0.7)"
             : state === "hover"
-            ? "rgba(244,238,229,0.5)"
-            : "rgba(244,238,229,0.25)",
-          opacity: 1,
+            ? "rgba(244, 238, 229, 0.65)"
+            : "rgba(244, 238, 229, 0.28)",
+          backgroundColor: isExpanded
+            ? "rgba(214, 182, 90, 0.1)"
+            : state === "button"
+            ? "rgba(214, 182, 90, 0.06)"
+            : "rgba(0, 0, 0, 0)",
         }}
-        transition={{ type: "spring", stiffness: 180, damping: 26, mass: 0.4 }}
+        transition={{ type: "spring", stiffness: 350, damping: 28 }}
       />
 
-      {/* Inner dot — sharp and precise */}
+      {/* Instant Precision Dot - GPU Accelerated */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full"
+        className="pointer-events-none fixed top-0 left-0 rounded-full will-change-transform"
         style={{
           x: dotX,
           y: dotY,
@@ -107,34 +142,20 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          width:  isExpanded ? 6 : 5,
-          height: isExpanded ? 6 : 5,
-          backgroundColor: isExpanded
+          width: isClicking ? 4 : isExpanded ? 7 : isHovered ? 6 : 5,
+          height: isClicking ? 4 : isExpanded ? 7 : isHovered ? 6 : 5,
+          scale: isClicking ? 0.65 : 1,
+          backgroundColor: isExpanded || state === "button"
             ? "#D6B65A"
             : state === "hover"
             ? "#F4EEE5"
-            : "rgba(244,238,229,0.9)",
-          opacity: 1,
+            : "rgba(244, 238, 229, 0.95)",
+          boxShadow: isHovered || isExpanded ? "0 0 12px rgba(214, 182, 90, 0.6)" : "none",
         }}
-        transition={{ type: "spring", stiffness: 900, damping: 35 }}
+        transition={{ type: "spring", stiffness: 1000, damping: 40 }}
       />
-
-      {/* Accent arc that appears on video/image hover — a decorative outer ring */}
-      {isExpanded && (
-        <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-[9997] rounded-full border border-[rgba(214,182,90,0.25)]"
-          style={{
-            x: ringX,
-            y: ringY,
-            translateX: "-50%",
-            translateY: "-50%",
-          }}
-          initial={{ width: 28, height: 28, opacity: 0 }}
-          animate={{ width: 80, height: 80, opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 22 }}
-        />
-      )}
-    </>
+    </div>
   );
 }
+
+

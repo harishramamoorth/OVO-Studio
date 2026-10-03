@@ -6,29 +6,30 @@ import CustomCursor from "@/components/common/CustomCursor";
 import PageLoader from "@/components/common/PageLoader";
 
 export const metadata: Metadata = {
-  title: "Luxury Signature | 360° Fashion Brand Solutions in Dubai",
+  title: "OVO Signature | 360° Luxury Fashion Agency — Dubai",
   description:
-    "Luxury Signature provides fashion business consulting, brand development, digital presence, marketing, production, and content creation solutions in Dubai.",
+    "OVO Signature is Dubai's premier luxury fashion agency. We provide fashion business consulting, brand development, digital presence, marketing, production, and content creation.",
   keywords: [
+    "OVO Signature",
     "Luxury Fashion Agency Dubai",
     "Fashion Business Consulting",
     "Fashion Tech Pack Dubai",
     "Dubai Fashion Design",
     "E-commerce Fashion Studio",
-    "Luxury Signature",
   ],
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   openGraph: {
-    title: "Luxury Signature | 360° Fashion Brand Solutions in Dubai",
+    title: "OVO Signature | 360° Luxury Fashion Agency — Dubai",
     description:
-      "Luxury Signature provides fashion business consulting, brand development, digital presence, marketing, production, and content creation solutions in Dubai.",
+      "OVO Signature is Dubai's premier luxury fashion agency — strategy, design, digital, and content creation for ambitious fashion brands.",
     url: "https://ovosignature.com",
-    siteName: "Luxury Signature Dubai",
+    siteName: "OVO Signature",
     images: [
       {
         url: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop",
         width: 1200,
         height: 630,
-        alt: "Luxury Signature Dubai",
+        alt: "OVO Signature Dubai",
       },
     ],
     locale: "en_US",
@@ -43,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className="bg-plum-950 text-beige-100 font-sans antialiased selection:bg-burgundy-700 selection:text-champagne-300 custom-cursor-active">
+      <body className="bg-plum-950 text-beige-100 font-sans antialiased selection:bg-burgundy-700 selection:text-champagne-300 custom-cursor-active overflow-x-hidden">
         <PageLoader />
         <CustomCursor />
         <Navbar />

@@ -18,7 +18,7 @@ export default function ServicesPage() {
     <div className="bg-[#0C040E] min-h-screen text-[#F4EEE5]">
 
       {/* Hero */}
-      <div className="relative pt-40 pb-24 px-6 text-center overflow-hidden">
+      <div className="relative pt-28 md:pt-40 pb-16 md:pb-24 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#D6B65A]/5 rounded-full blur-[120px]" />
         </div>
@@ -26,7 +26,7 @@ export default function ServicesPage() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[rgba(214,182,90,0.08)] border border-[rgba(214,182,90,0.2)] mb-8">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D6B65A]">360° Luxury Fashion Services</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-serif text-[#F4EEE5] mb-6 leading-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-serif text-[#F4EEE5] mb-6 leading-tight">
             Our Full Portfolio of<br />
             <span className="text-[#D6B65A] italic">Fashion Solutions</span>
           </h1>

@@ -68,7 +68,7 @@ export default function ServiceDetailPage({
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[rgba(214,182,90,0.1)] border border-[rgba(214,182,90,0.3)] mb-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D6B65A]">{targetService.categoryTitle}</span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight mb-4">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight mb-4">
             {targetService.title}
           </h1>
           <p className="text-sm md:text-base text-[#C8BDB7] font-light max-w-2xl leading-relaxed">
@@ -97,7 +97,7 @@ export default function ServiceDetailPage({
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="max-w-6xl mx-auto px-6 md:px-10 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
 
         {/* Left: Description + Features */}
         <div className="lg:col-span-7 space-y-12">
@@ -105,7 +105,7 @@ export default function ServiceDetailPage({
           {/* Full Description */}
           <div className="space-y-4">
             <div className="w-12 h-[1px] bg-[#D6B65A]" />
-            <h2 className="text-2xl md:text-3xl font-serif text-[#F4EEE5]">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#F4EEE5]">
               From Vision to Market Success
             </h2>
             <p className="text-sm md:text-base text-[#C8BDB7] leading-relaxed font-light">
@@ -142,7 +142,7 @@ export default function ServiceDetailPage({
 
         {/* Right: Sticky CTA Panel */}
         <div className="lg:col-span-5">
-          <div className="sticky top-28 space-y-6">
+          <div className="space-y-6 lg:sticky lg:top-28">
 
             {/* Image */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[rgba(214,182,90,0.2)] shadow-2xl">

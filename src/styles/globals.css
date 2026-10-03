@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #10070F;
+    --bg-secondary: #170B15;
+    --bg-card: #21101E;
+    --bg-elevated: #291321;
+    --text-primary: #F4EEE5;
+    --text-secondary: #C8BDB7;
+    --gold-champagne: #D6B65A;
+    --gold-soft: #B9974B;
+    --border-gold: rgba(214, 182, 90, 0.18);
+    --border-subtle: rgba(244, 238, 229, 0.08);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #10070F;
+    color: #F4EEE5;
+    font-family: 'Manrope', system-ui, sans-serif;
+  }
+
+  /* Hide native cursor on desktop — replaced by CustomCursor component */
+  @media (pointer: fine) and (min-width: 1024px) {
+
+    *,
+    *::before,
+    *::after {
+      cursor: none !important;
+    }
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: #10070F;
+    color: #F4EEE5;
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: #291321;
+    color: #D6B65A;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #10070F;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #21101E;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D6B65A;
+  }
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Manrope', system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Glassmorphism & Surface Utilities */
+.glass-panel {
+  background: rgba(23, 11, 21, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(244, 238, 229, 0.08);
+}
+
+.glass-card {
+  background: #21101E;
+  border: 1px solid rgba(214, 182, 90, 0.14);
+}
+
+.glass-card:hover {
+  border-color: rgba(214, 182, 90, 0.35);
+}
+
+.gold-accent-text {
+  color: #D6B65A;
+}
+
+.subtle-border {
+  border-color: rgba(244, 238, 229, 0.08);
+}
+
+.gold-border {
+  border-color: rgba(214, 182, 90, 0.18);
+}
+
+/* Responsive Editorial Spacing */
+.section-padding {
+  padding-top: clamp(80px, 10vw, 180px);
+  padding-bottom: clamp(80px, 10vw, 180px);
+}
+
+/* Typography Hierarchy Enforcements */
+.heading-h1 {
+  font-size: clamp(3.5rem, 7.5vw, 8.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.heading-h2 {
+  font-size: clamp(2.5rem, 4.5vw, 5.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+.heading-h3 {
+  font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.label-uppercase {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+/* Shimmer animation for loading/highlight states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(90deg, #D6B65A 0%, #f0d880 50%, #D6B65A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Clip reveal animation */
+@keyframes clipRevealDown {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* Smooth image zoom on hover (usage: .img-zoom-parent .img-zoom-child) */
+.img-zoom-parent {
+  overflow: hidden;
+}
+
+.img-zoom-parent img,
+.img-zoom-parent video {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), brightness 0.5s ease;
+  will-change: transform;
+}
+
+.img-zoom-parent:hover img,
+.img-zoom-parent:hover video {
+  transform: scale(1.05);
+}
+
+/* Line underline grow */
+.underline-grow {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-grow::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #D6B65A;
+  transition: width 0.4s ease;
+}
+
+.underline-grow:hover::after {
+  width: 100%;
+}
+
+/* Glow pulse for CTA buttons */
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(214, 182, 90, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(214, 182, 90, 0.5);
+  }
+}
+
+.btn-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Fade up stagger children */
+.stagger-children>* {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus ring override */
+*:focus-visible {
+  outline: 2px solid #D6B65A;
+  outline-offset: 3px;
+  border-radius: 4px;
+}

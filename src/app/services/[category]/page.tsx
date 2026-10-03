@@ -74,6 +74,7 @@ export default function ServiceCategoryPage({
             className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-[#F4EEE5] uppercase tracking-wide leading-tight"
           >
             {category.title}<br />
+            
             <span className="text-[#D6B65A]">For Ambitious Brands</span>
           </motion.h1>
         </div>

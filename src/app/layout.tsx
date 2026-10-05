@@ -4,6 +4,14 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/common/CustomCursor";
 import PageLoader from "@/components/common/PageLoader";
+import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/shopify/CartDrawer";
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: "OVO Signature | 360° Luxury Fashion Agency — Dubai",
@@ -17,7 +25,6 @@ export const metadata: Metadata = {
     "Dubai Fashion Design",
     "E-commerce Fashion Studio",
   ],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   openGraph: {
     title: "OVO Signature | 360° Luxury Fashion Agency — Dubai",
     description:
@@ -45,11 +52,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className="bg-plum-950 text-beige-100 font-sans antialiased selection:bg-burgundy-700 selection:text-champagne-300 custom-cursor-active overflow-x-hidden">
-        <PageLoader />
-        <CustomCursor />
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <CartProvider>
+          <PageLoader />
+          <CustomCursor />
+          <Navbar />
+          <CartDrawer />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

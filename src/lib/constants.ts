@@ -43,6 +43,7 @@ export const IMAGE_ASSETS = {
 export const NAVIGATION_LINKS = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services", hasMegaMenu: true },
+  { name: "Store", href: "/products" },
   { name: "Pricing & Plans", href: "/pricing" },
   { name: "About Us", href: "/about" },
   { name: "Contact", href: "/contact" },

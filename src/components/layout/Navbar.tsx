@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight, X, Menu } from "lucide-react";
+import { ChevronDown, ArrowRight, X, Menu, ShoppingBag } from "lucide-react";
 import Logo from "@/components/common/Logo";
 import { SERVICE_CATEGORIES, NAVIGATION_LINKS } from "@/lib/constants";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
+  const { totalQuantity, openCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -150,7 +152,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-[12px] uppercase tracking-[0.18em] font-medium transition-colors relative py-2 ${
+                  className={`text-[12px] uppercase tracking-[0.18em] font-medium whitespace-nowrap transition-colors relative py-2 ${
                     isActive ? "text-[#D6B65A] font-semibold" : "text-[#F4EEE5]/90 hover:text-white"
                   }`}
                 >
@@ -166,8 +168,21 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center">
+          {/* Desktop CTA & Cart */}
+          <div className="hidden lg:flex items-center space-x-5">
+            <button
+              onClick={openCart}
+              className="relative p-2.5 rounded-full border border-[rgba(214,182,90,0.25)] text-[#F4EEE5] hover:text-[#D6B65A] hover:border-[#D6B65A] transition-all group"
+              aria-label="View Shopping Bag"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              {totalQuantity > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-[#D6B65A] text-[#10070F] font-mono text-[10px] font-bold flex items-center justify-center animate-pulse">
+                  {totalQuantity}
+                </span>
+              )}
+            </button>
+
             <Link
               href="/book"
               className="px-6 py-3 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10070F] bg-gradient-to-r from-[#F4EEE5] via-[#D6B65A] to-[#B9974B] hover:shadow-lg hover:shadow-[#D6B65A]/20 hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center gap-2 group"
@@ -177,14 +192,29 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full border border-[rgba(214,182,90,0.25)] text-[#F4EEE5] hover:border-[#D6B65A] hover:text-[#D6B65A] transition-all"
-            aria-label="Open Navigation"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+          {/* Mobile Cart & Hamburger */}
+          <div className="lg:hidden flex items-center space-x-3">
+            <button
+              onClick={openCart}
+              className="relative w-10 h-10 flex items-center justify-center rounded-full border border-[rgba(214,182,90,0.25)] text-[#F4EEE5] hover:border-[#D6B65A] hover:text-[#D6B65A] transition-all"
+              aria-label="View Shopping Bag"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              {totalQuantity > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#D6B65A] text-[#10070F] font-mono text-[9px] font-bold flex items-center justify-center">
+                  {totalQuantity}
+                </span>
+              )}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="relative w-10 h-10 flex items-center justify-center rounded-full border border-[rgba(214,182,90,0.25)] text-[#F4EEE5] hover:border-[#D6B65A] hover:text-[#D6B65A] transition-all"
+              aria-label="Open Navigation"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </header>
 

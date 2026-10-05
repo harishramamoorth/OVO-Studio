@@ -342,7 +342,9 @@ export default function AboutPage() {
       <section className="relative h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none z-0">
           <motion.div
+
             initial={{ scale: 1.15 }}
+            
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 2.5, ease: "easeOut" }}
